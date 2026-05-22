@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Meme Vault | $DUST Token</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0d0d11; color: #f3f4f6; }
+        .glow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.15); }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-yellow-500 selection:text-black min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center w-full border-b border-gray-800">
+        <div class="flex items-center space-x-2">
+            <a href="index.html" class="text-2xl font-black tracking-tighter text-yellow-500 hover:opacity-80 transition">$DUST</a>
+        </div>
+        <nav class="space-x-6 text-sm font-medium text-gray-400">
+            <a href="index.html" class="hover:text-white transition">← Back to Main</a>
+        </nav>
+    </header>
+
+    <!-- Headline Area -->
+    <section class="max-w-4xl mx-auto px-4 text-center pt-16 pb-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-yellow-500 bg-yellow-500/10 px-4 py-1.5 rounded-full">Community Assets</span>
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-4 mb-4 text-white">The DUST Meme Vault</h1>
+        <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
+            Click any image or GIF to open it full screen. Save them, grab them, and use them to flood the timelines during raids.
+        </p>
+    </section>
+
+    <!-- Dynamic Meme Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+        <div id="meme-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- JavaScript will inject items here -->
+        </div>
+    </main>
+
+    <!-- Lightbox Modal (Hidden by Default) -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex flex-col items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl font-bold transition">&times;</button>
+        <img id="lightbox-img" src="" alt="Meme Preview" class="max-h-[80vh] max-w-full rounded-lg object-contain glow" onclick="event.stopPropagation()">
+        <div class="mt-4 flex gap-4" onclick="event.stopPropagation()">
+            <a id="lightbox-download" href="" download class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition">
+                Download Asset
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-900 py-8 text-center text-xs text-gray-600 mt-12">
+        <p>&copy; 2026 Never Sell Your Dust Community.</p>
+    </footer>
+
+    <!-- Workflow Script -->
+    <script>
+        // ==========================================
+        // WORKFLOW REPOSITORY: UPDATING MEMES
+        // To add a new image/gif, simply add a line below!
+        // Put your files inside a folder named "assets"
+        // ==========================================
+        const memeRepository = [
+            { src: "assets/dust-hand-and-coin.jpg", title: "Dust Hand and Coin" },
+            { src: "assets/dust-hand-sign.jpg", title: "Dust Hand Sign" },
+            { src: "assets/dust-head.jpg", title: "Dust Head" },
+            { src: "assets/dust-moon.jpg", title: "Dust To The Moon" },
+            // Add future items directly here:
+            { src: "assets/dust-gif.mp4", title: "Dust Video" },
+            { src: "assets/dust-song.jpg", title: "Dust Song" },
+            { src: "assets/gold-dust.jpg", title: "Gold Dust" },
+            { src: "assets/hand-sign.jpg", title: "Dust Sign" },
+            { src: "assets/never-sell-your-dust-twin.jpg", title: "Never Sell Dust" },
+            { src: "assets/song-lyrics.jpg", title: "Song Lyrics" },
+            { src: "assets/twin-Jesus-Chain.jpg", title: "Dust Chain" },
+            { src: "assets/you-cold-twin.jpg", title: "Dust Twin" },
+        ];
+
+        const grid = document.getElementById('meme-grid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxDownload = document.getElementById('lightbox-download');
+
+        // Build the grid automatically
+        memeRepository.forEach(meme => {
+            const wrapper = document.createElement('div');
+            wrapper.className = "group relative bg-gray-900/40 border border-gray-800/80 rounded-xl overflow-hidden cursor-pointer aspect-square flex items-center justify-center p-2 hover:border-gray-700 transition";
+            wrapper.onclick = () => openLightbox(meme.src);
+
+            const img = document.createElement('img');
+            img.src = meme.src;
+            img.alt = meme.title;
+            img.className = "max-h-full max-w-full object-contain rounded-lg group-hover:scale-105 transition duration-300";
+            // Optimization for smooth loading
+            img.loading = "lazy"; 
+
+            wrapper.appendChild(img);
+            grid.appendChild(wrapper);
+        });
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightboxDownload.href = src;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // stop page scroll
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = ''; // restore page scroll
+        }
+    </script>
+</body>
+</html>
