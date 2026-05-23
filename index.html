@@ -12,18 +12,73 @@
 </head>
 <body class="font-sans antialiased selection:bg-yellow-500 selection:text-black">
 
-    <!-- Header / Nav -->
-    <header class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center border-b border-gray-800">
-        <div class="flex items-center space-x-2">
-            <span class="text-2xl font-black tracking-tighter text-yellow-500">$DUST</span>
+   <!-- Header / Nav -->
+    <header class="max-w-6xl mx-auto px-4 py-6 relative border-b border-gray-800 z-50">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="text-2xl font-black tracking-tighter text-yellow-500">$DUST</a>
+            </div>
+
+            <!-- Desktop Navigation (Hidden on Mobile) -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400 items-center">
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#community" class="hover:text-white transition">Community Hub</a>
+                <a href="memes.html" class="text-yellow-500 font-bold hover:text-yellow-400 transition">⚡ Meme Vault</a>
+                <a href="#tokenomics" class="hover:text-white transition">Tokenomics</a>
+                <a href="#how-to-buy" class="hover:text-white transition">How To Buy</a>
+            </nav>
+
+            <!-- Desktop Buy Button (Hidden on Mobile) -->
+            <a href="https://jup.ag/tokens/6veQU7HDdXV5DC2Eqhnri5q71gfxMzG73qKkSSudnpump" target="_blank" class="hidden md:inline-block bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition">
+                Buy $DUST
+            </a>
+
+            <!-- Mobile Hamburger Button (Hidden on Desktop) -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white focus:outline-none p-2" aria-label="Toggle Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Hamburger Icon Lines -->
+                    <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
-        <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
-    <a href="#about" class="hover:text-white transition">About</a>
-    <a href="#community" class="hover:text-white transition">Community Hub</a>
-    <a href="memes.html" class="text-yellow-500 font-bold hover:text-yellow-400 transition">⚡ Meme Vault</a>
-    <a href="#tokenomics" class="hover:text-white transition">Tokenomics</a>
-    <a href="#how-to-buy" class="hover:text-white transition">How To Buy</a>
-</nav>
+
+        <!-- Mobile Dropdown Menu (Hidden by default via 'hidden') -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-[#0d0d11]/95 backdrop-blur-md border-b border-gray-800 py-6 px-4 flex flex-col space-y-4 shadow-xl">
+            <a href="#about" class="text-gray-300 hover:text-white text-lg font-medium py-1" onclick="toggleMobileMenu()">About</a>
+            <a href="#community" class="text-gray-300 hover:text-white text-lg font-medium py-1" onclick="toggleMobileMenu()">Community Hub</a>
+            <a href="memes.html" class="text-yellow-500 font-bold text-lg py-1" onclick="toggleMobileMenu()">⚡ Meme Vault</a>
+            <a href="#tokenomics" class="text-gray-300 hover:text-white text-lg font-medium py-1" onclick="toggleMobileMenu()">Tokenomics</a>
+            <a href="#how-to-buy" class="text-gray-300 hover:text-white text-lg font-medium py-1" onclick="toggleMobileMenu()">How To Buy</a>
+            <a href="https://jup.ag/tokens/6veQU7HDdXV5DC2Eqhnri5q71gfxMzG73qKkSSudnpump" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black text-center text-sm font-bold uppercase tracking-wider py-3 rounded-xl transition block">
+                Buy $DUST
+            </a>
+        </div>
+    </header>
+
+    <!-- Simple JavaScript for the Hamburger Action -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconPath = document.getElementById('menu-icon-path');
+
+        menuBtn.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            
+            if (isHidden) {
+                // Open the menu
+                mobileMenu.classList.remove('hidden');
+                // Change hamburger icon to an "X"
+                menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            } else {
+                // Close the menu
+                mobileMenu.classList.add('hidden');
+                // Change back to original hamburger icon
+                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        }
+    </script>
         <a href="https://jup.ag/tokens/6veQU7HDdXV5DC2Eqhnri5q71gfxMzG73qKkSSudnpump" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition">
             Buy $DUST
         </a>
